@@ -31,10 +31,11 @@ class SeanceController extends AbstractController
      */
     public function today(SeanceRepository $seanceRepository): Response
     {
-        // $date=new date();
-        // dd($date);
+        $date = date('Y-m-d');
+        $mydate=$date."%";
+        //dd($mydate);
         return $this->render('seance/index.html.twig', [
-            'seances' => $seanceRepository->findByDate('2021-08-22%'),
+            'seances' => $seanceRepository->findByDate($date."%"),
         ]);
     }
 
