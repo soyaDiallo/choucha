@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Seance index
+{% endblock %}
+
+{% block body %}
+	<h1>Liste des Seances</h1>
+	<a href="{{ path('seance_new') }}">Ajouter</a>
+	<a href="{{ path('seance_today') }}">| Emploi du temps du jour!!</a>
+	<hr></hr>
+	<table class="table" border="1">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Num</th>
+				<th>Type</th>
+				<th>Date et Heure</th>
+				<th>Salle</th>
+				<th>Matiere</th>
+				<th>Professeur</th>
+				<th>Classe</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for seance in seances %}
+				<tr>
+					<td>{{ seance.id }}</td>
+					<td>{{ seance.num }}</td>
+					<td>{{ seance.type }}</td>
+					<td>{{ seance.date ? seance.date|date('Y-m-d H:i') : '' }}</td>
+					<td>{{ seance.salle }}</td>
+					<td>{{ seance.matiere }}</td>
+					<td>{{ seance.prof }}</td>
+					<td>{{ seance.classe }}</td>
+					<td>
+						<a href="{{ path('seance_show', {'id': seance.id}) }}">Show</a>
+						<a href="{{ path('seance_edit', {'id': seance.id}) }}">Modifier</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="5">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<a href="{{ path('seance_index') }}">Toutes les seances</a>
+
+{% endblock %}
